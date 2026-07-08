@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CorridorDungeonGeneratorResource" load_steps=2 format=3 uid="uid://dbjfgknhy802y"]
+
+[ext_resource type="Script" path="res://Scripts/Dungeon/DungeonGenerators/ResourceClasses/CorridorDungeonGeneratorResource.cs" id="1_relg5"]
+
+[resource]
+script = ExtResource("1_relg5")
+corridorLength = 15
+corridorCount = 5
+roomPercent = 0.8
+corridorWidth = 1

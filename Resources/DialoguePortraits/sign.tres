@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DialoguePortraitResource" load_steps=2 format=3 uid="uid://bav24f3exjtje"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Dialogue/DialoguePortraitResource.cs" id="1_yrvjs"]
+
+[resource]
+script = ExtResource("1_yrvjs")
+Name = "sign"
+Expressions = {
+"empty": "res://Assets/PixelArt/Interactables/Signposts/Empty.png",
+"one": "res://Assets/PixelArt/Interactables/Signposts/One.png",
+"one_tilted": "res://Assets/PixelArt/Interactables/Signposts/OneTilted.png",
+"two": "res://Assets/PixelArt/Interactables/Signposts/Two.png",
+"two_tilted": "res://Assets/PixelArt/Interactables/Signposts/TwoTilted.png",
+"unknown": "res://Assets/PixelArt/Interactables/Signposts/Unknown.png"
+}

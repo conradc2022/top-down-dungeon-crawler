@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cel3qeniy6pwe"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/Stairs.cs" id="1_y3lb7"]
+[ext_resource type="Texture2D" uid="uid://brqye3ihgvw7f" path="res://Assets/PixelArt/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="2_0umkd"]
+[ext_resource type="Resource" uid="uid://cgmaiabi0wl4m" path="res://Assets/Dialogue/Stairs.dialogue" id="2_4dnfj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oss0h"]
+size = Vector2(14, 14)
+
+[node name="Stairs" type="StaticBody2D"]
+z_index = -1
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_y3lb7")
+dialogResource = ExtResource("2_4dnfj")
+dialogStart = "start"
+metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
+metadata/_edit_vertical_guides_ = [-8.0, 8.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_0umkd")
+hframes = 11
+vframes = 10
+frame = 42
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oss0h")
+debug_color = Color(0.882353, 0.333333, 0.0627451, 0.117647)

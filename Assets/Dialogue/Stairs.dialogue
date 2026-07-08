@@ -1,0 +1,7 @@
+~ start
+Continue on to the next floor?
+- Yes => confirm
+- No => END
+~ confirm
+do ConfirmStairs()
+=> END

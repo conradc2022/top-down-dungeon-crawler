@@ -1,0 +1,29 @@
+[gd_scene load_steps=8 format=3 uid="uid://bv4re8whf08iu"]
+
+[ext_resource type="Texture2D" uid="uid://cpn0shearw3ii" path="res://Assets/PixelArt/Interactables/Signposts/Empty.png" id="1_atlpm"]
+[ext_resource type="Script" path="res://Scripts/Interactables/Signpost.cs" id="1_kw45m"]
+[ext_resource type="Texture2D" uid="uid://uokxq13omj3a" path="res://Assets/PixelArt/Interactables/Signposts/One.png" id="3_inxkf"]
+[ext_resource type="Texture2D" uid="uid://b3prif3sutoa6" path="res://Assets/PixelArt/Interactables/Signposts/OneTilted.png" id="4_4e2vt"]
+[ext_resource type="Texture2D" uid="uid://djp7xgi1qqnc4" path="res://Assets/PixelArt/Interactables/Signposts/Two.png" id="5_41vaw"]
+[ext_resource type="Texture2D" uid="uid://525t6ptihvbp" path="res://Assets/PixelArt/Interactables/Signposts/TwoTilted.png" id="6_xbnc0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oss0h"]
+size = Vector2(14, 14)
+
+[node name="Signpost" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_kw45m")
+Sprites = Array[Texture2D]([ExtResource("1_atlpm"), ExtResource("3_inxkf"), ExtResource("4_4e2vt"), ExtResource("5_41vaw"), ExtResource("6_xbnc0")])
+metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
+metadata/_edit_vertical_guides_ = [-8.0, 8.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_atlpm")
+offset = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oss0h")
+debug_color = Color(0.585341, 0.548007, 0.119147, 0.42)

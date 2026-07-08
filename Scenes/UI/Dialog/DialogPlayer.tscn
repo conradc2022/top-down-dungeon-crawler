@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsns53m77ouhf"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Dialog/DialogPlayer.cs" id="1_u1dpk"]
+
+[node name="DialogPlayer" type="CanvasLayer"]
+script = ExtResource("1_u1dpk")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RoomFirstDungeonGeneratorResource" load_steps=2 format=3 uid="uid://dno3mhnl0cd86"]
+
+[ext_resource type="Script" path="res://Scripts/Dungeon/DungeonGenerators/ResourceClasses/RoomFirstDungeonGeneratorResource.cs" id="1_f7upx"]
+
+[resource]
+script = ExtResource("1_f7upx")
+minRoomWidth = 4
+minRoomHeight = 4
+dungeonWidth = 10
+dungeonHeight = 10
+offset = 1
+randomWalkRoom = true
+Iterations = 10
+WalkLength = 10
+StartRandomly = true

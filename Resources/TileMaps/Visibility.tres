@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dcpetvhkkot8y"]
+
+[ext_resource type="Texture2D" uid="uid://bwjegr0si4mv7" path="res://Assets/PixelArt/VisibilityMasks/VisibilityMap.png" id="1_48xew"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0kiex"]
+texture = ExtResource("1_48xew")
+margins = Vector2i(48, 0)
+use_texture_padding = false
+0:0/0 = 0
+1:0/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_0kiex")

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="StatsResource" load_steps=2 format=3 uid="uid://dxjte8e54jha1"]
+
+[ext_resource type="Script" path="res://Scripts/Character/Statistics/StatsResource.cs" id="1_j6nt0"]
+
+[resource]
+script = ExtResource("1_j6nt0")
+SourceName = "BasicSlow"
+SourceType = 1
+Accuracy = 100
+Awareness = 100
+CriticalChance = 5
+CriticalModifier = 2.0
+Evasion = 10
+Health = 25.0
+Hunger = 100
+Loyalty = 100
+MentalAttack = 4
+MentalDefense = 1
+PhysicalAttack = 5
+PhysicalDefense = 3
+Speed = 5
+Stealth = 100

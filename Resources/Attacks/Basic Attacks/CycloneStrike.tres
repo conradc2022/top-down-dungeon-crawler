@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://ctv1van6i7mb"]
+
+[ext_resource type="Script" path="res://Scripts/Attacks/DamageStage.cs" id="1_8p4ck"]
+[ext_resource type="Script" path="res://Scripts/Attacks/AttackStage.cs" id="2_p8xbt"]
+[ext_resource type="Script" path="res://Scripts/Attacks/AttackResource.cs" id="3_ppe5o"]
+
+[sub_resource type="Resource" id="Resource_0imb5"]
+script = ExtResource("1_8p4ck")
+Power = 35.0
+FixedDamage = 0.0
+secondaryEffect = null
+secondaryEffectStacking = 0
+
+[sub_resource type="Resource" id="Resource_4d2xh"]
+script = ExtResource("2_p8xbt")
+damageType = 1
+targets = 4
+travelType = 17
+damageStage = SubResource("Resource_0imb5")
+distance = 1
+accuracy = 0.95
+
+[resource]
+script = ExtResource("3_ppe5o")
+Name = "CycloneStrike"
+Stages = Array[Object]([SubResource("Resource_4d2xh")])
+Cooldown = 0
+HungerCost = 0
+Description = "A basic attack with your equipped weapon."

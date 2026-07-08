@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmgjr5wkp5b7g"]
+
+[ext_resource type="Texture2D" uid="uid://ew6x4fikkn74" path="res://icon.svg" id="1_7cn2j"]
+[ext_resource type="Script" path="res://Scripts/UI/Inventory/CharacterOverview.cs" id="1_on64k"]
+[ext_resource type="Theme" uid="uid://46le30cv5vyw" path="res://Assets/Themes/default_theme.tres" id="1_vrygl"]
+
+[node name="CharacterOverview" type="Control"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_vrygl")
+script = ExtResource("1_on64k")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_7cn2j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 10.0
+offset_right = 146.0
+offset_bottom = 33.0
+text = "Character 1"
+
+[node name="Level" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 0
+offset_left = 177.0
+offset_top = 2.0
+offset_right = 283.0
+offset_bottom = 42.0
+
+[node name="LevelLabel" type="Label" parent="Level"]
+layout_mode = 2
+text = "Lv: "
+
+[node name="LevelText" type="Label" parent="Level"]
+layout_mode = 2
+text = "999"
+
+[node name="Health" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 0
+offset_left = 286.0
+offset_top = 2.0
+offset_right = 392.0
+offset_bottom = 42.0
+
+[node name="HPLabel" type="Label" parent="Health"]
+layout_mode = 2
+text = "HP: "
+
+[node name="HPCurrent" type="Label" parent="Health"]
+layout_mode = 2
+text = "999"
+
+[node name="HPSep" type="Label" parent="Health"]
+layout_mode = 2
+text = "/"
+
+[node name="HPTotal" type="Label" parent="Health"]
+layout_mode = 2
+text = "999"
+
+[node name="Hunger" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 0
+offset_left = 438.0
+offset_top = 2.0
+offset_right = 559.0
+offset_bottom = 42.0
+
+[node name="HungerLabel" type="Label" parent="Hunger"]
+layout_mode = 2
+text = "Belly: "
+
+[node name="HungerCurrent" type="Label" parent="Hunger"]
+layout_mode = 2
+text = "999"
+
+[node name="HungerSep" type="Label" parent="Hunger"]
+layout_mode = 2
+text = "/"
+
+[node name="HungerTotal" type="Label" parent="Hunger"]
+layout_mode = 2
+text = "999"
+
+[node name="Status" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 0
+offset_left = 617.0
+offset_top = 2.0
+offset_right = 738.0
+offset_bottom = 42.0
+
+[node name="StatusLabel" type="Label" parent="Status"]
+layout_mode = 2
+text = "Status: "
+
+[node name="StatusText" type="Label" parent="Status"]
+layout_mode = 2
+text = "Exhausted"

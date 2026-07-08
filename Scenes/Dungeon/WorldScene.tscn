@@ -1,0 +1,347 @@
+[gd_scene load_steps=27 format=3 uid="uid://8oi41mxvb3fl"]
+
+[ext_resource type="PackedScene" uid="uid://cibcaauau52xx" path="res://Scenes/Dungeon/DungeonGenerator.tscn" id="1_vnqed"]
+[ext_resource type="Script" path="res://Scripts/Dungeon/DungeonManagement/InitDungeon.cs" id="1_yyorf"]
+[ext_resource type="PackedScene" uid="uid://cow200dww5s5w" path="res://Scenes/Character/Character.tscn" id="2_1iw43"]
+[ext_resource type="PackedScene" uid="uid://dwrclgs5fb6e4" path="res://Scenes/SaveManager/SaveManager.tscn" id="2_f24f2"]
+[ext_resource type="PackedScene" uid="uid://djgbsexklsgoh" path="res://Scenes/Dungeon/TurnQueue/TurnQueue.tscn" id="3_tyfe2"]
+[ext_resource type="PackedScene" uid="uid://i2v3ab6qe26s" path="res://Scenes/UI/HUD/Healthbar.tscn" id="4_6s5ad"]
+[ext_resource type="Resource" uid="uid://dcdciuo2064f8" path="res://Resources/Statistics/Species/Basic.tres" id="4_l67pl"]
+[ext_resource type="Resource" uid="uid://7c7mlv3h75hv" path="res://Resources/DungeonFloorResources/default_0_pattern.tres" id="4_sh6rc"]
+[ext_resource type="Script" path="res://Scripts/Dungeon/DungeonManagement/DungeonParameterResource.cs" id="4_wdusa"]
+[ext_resource type="Texture2D" uid="uid://ua8jb5vq8gik" path="res://Assets/PixelArt/2D Pixel Dungeon Asset Pack v2.0/Snoblin_Prototype_Character/Prototype_Character/Prototype_Character_Red.png" id="4_ylomw"]
+[ext_resource type="Texture2D" uid="uid://im64i4ixi1yf" path="res://Assets/PixelArt/2D Pixel Dungeon Asset Pack v2.0/Snoblin_Prototype_Character/Prototype_Character/Prototype_Character_Blue.png" id="5_7xcrd"]
+[ext_resource type="Resource" uid="uid://be25ioa4wx2ch" path="res://Resources/DungeonFloorResources/random_0_pattern.tres" id="5_10th0"]
+[ext_resource type="Resource" uid="uid://dfhw55trbdfm1" path="res://Resources/Statistics/Species/BasicFast.tres" id="5_dcu6a"]
+[ext_resource type="TileSet" uid="uid://de7sbfi0cujco" path="res://Assets/PixelArt/DungeonGenerator.tres" id="6_870jt"]
+[ext_resource type="Resource" uid="uid://dno3mhnl0cd86" path="res://Resources/DungeonGenerator/SmallRoomFirst.tres" id="7_7f3l2"]
+[ext_resource type="PackedScene" uid="uid://bv4re8whf08iu" path="res://Scenes/Interactables/Signpost.tscn" id="7_7twyo"]
+[ext_resource type="Resource" uid="uid://dxjte8e54jha1" path="res://Resources/Statistics/Species/BasicSlow.tres" id="7_a2b2u"]
+[ext_resource type="Resource" uid="uid://dbjfgknhy802y" path="res://Resources/DungeonGenerator/SmallCorridorFirst.tres" id="7_eitra"]
+[ext_resource type="Resource" uid="uid://c4ura0vbttyae" path="res://Assets/Dialogue/Signpost.dialogue" id="7_sa4e2"]
+[ext_resource type="PackedScene" uid="uid://cel3qeniy6pwe" path="res://Scenes/Interactables/Stairs.tscn" id="13_f6fwp"]
+[ext_resource type="Theme" uid="uid://46le30cv5vyw" path="res://Assets/Themes/default_theme.tres" id="15_104wg"]
+
+[sub_resource type="Resource" id="Resource_lehxu"]
+script = ExtResource("4_wdusa")
+Name = "Crimson Tower"
+TileSets = {
+"default": ExtResource("6_870jt")
+}
+FloorSets = Array[Object]([ExtResource("4_sh6rc"), ExtResource("5_10th0"), ExtResource("4_sh6rc"), ExtResource("5_10th0"), ExtResource("5_10th0")])
+
+[sub_resource type="Animation" id="Animation_skrgn"]
+resource_name = "Fade-In"
+length = 0.500003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c7hpk"]
+resource_name = "Fade-Out"
+length = 0.500003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.166667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3bvg4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_26j24"]
+_data = {
+"Fade-In": SubResource("Animation_skrgn"),
+"Fade-Out": SubResource("Animation_c7hpk"),
+"RESET": SubResource("Animation_3bvg4")
+}
+
+[node name="WorldScene" type="Node2D"]
+script = ExtResource("1_yyorf")
+
+[node name="SaveManager" parent="." instance=ExtResource("2_f24f2")]
+
+[node name="DungeonGenerator" parent="." instance=ExtResource("1_vnqed")]
+scale = Vector2(1, 1)
+dungeonParameters = SubResource("Resource_lehxu")
+
+[node name="VisiblityMap" parent="DungeonGenerator" index="0"]
+collision_visibility_mode = 2
+
+[node name="TileMap" parent="DungeonGenerator" index="1"]
+z_index = -2
+scale = Vector2(1, 1)
+
+[node name="CorridorFirstGenerator" parent="DungeonGenerator" index="3"]
+resource = ExtResource("7_eitra")
+
+[node name="RoomFirstGenerator" parent="DungeonGenerator" index="4"]
+resource = ExtResource("7_7f3l2")
+
+[node name="SpecialTiles" type="Node" parent="."]
+
+[node name="LooseItems" type="Node" parent="."]
+
+[node name="TurnQueue" parent="." instance=ExtResource("3_tyfe2")]
+
+[node name="PlayerCharacter" parent="TurnQueue" node_paths=PackedStringArray("PrimaryHealth", "LevelState") instance=ExtResource("2_1iw43")]
+slide_on_ceiling = false
+ShowDebugHealth = true
+PrimaryHealth = NodePath("../../CanvasLayer/PlayerHealth")
+LevelState = NodePath("../../CanvasLayer/Character Level")
+
+[node name="CharacterInfo" parent="TurnQueue/PlayerCharacter" index="0"]
+CharacterName = "Player"
+Team = "Player's"
+
+[node name="Statistics" parent="TurnQueue/PlayerCharacter" index="4"]
+SpeciesStats = ExtResource("5_dcu6a")
+
+[node name="Camera2D" type="Camera2D" parent="TurnQueue/PlayerCharacter"]
+zoom = Vector2(3, 3)
+
+[node name="DummyEnemy" parent="TurnQueue" instance=ExtResource("2_1iw43")]
+position = Vector2(32, 0)
+slide_on_ceiling = false
+controller = 2
+ShowDebugHealth = true
+
+[node name="CharacterInfo" parent="TurnQueue/DummyEnemy" index="0"]
+CharacterName = "Foobar"
+Team = "Enem1"
+
+[node name="Sprite2D" parent="TurnQueue/DummyEnemy" index="2"]
+texture = ExtResource("4_ylomw")
+
+[node name="Statistics" parent="TurnQueue/DummyEnemy" index="4"]
+SpeciesStats = ExtResource("7_a2b2u")
+
+[node name="DummyEnemy2" parent="TurnQueue" instance=ExtResource("2_1iw43")]
+self_modulate = Color(1, 1, 0, 1)
+position = Vector2(108, 0)
+slide_on_ceiling = false
+controller = 2
+ShowDebugHealth = true
+
+[node name="CharacterInfo" parent="TurnQueue/DummyEnemy2" index="0"]
+CharacterName = "Foobar"
+Team = "Enem1"
+Allegence = 1
+
+[node name="Sprite2D" parent="TurnQueue/DummyEnemy2" index="2"]
+texture = ExtResource("4_ylomw")
+
+[node name="Statistics" parent="TurnQueue/DummyEnemy2" index="4"]
+SpeciesStats = ExtResource("7_a2b2u")
+
+[node name="DummyAlly" parent="TurnQueue" instance=ExtResource("2_1iw43")]
+position = Vector2(65, 0)
+slide_on_ceiling = false
+controller = 2
+ShowDebugHealth = true
+
+[node name="CharacterInfo" parent="TurnQueue/DummyAlly" index="0"]
+CharacterName = "CoOp"
+Team = "Player's"
+
+[node name="Sprite2D" parent="TurnQueue/DummyAlly" index="2"]
+texture = ExtResource("5_7xcrd")
+
+[node name="Statistics" parent="TurnQueue/DummyAlly" index="4"]
+SpeciesStats = ExtResource("4_l67pl")
+
+[node name="Interactables" type="Node" parent="."]
+
+[node name="Signpost" parent="Interactables" instance=ExtResource("7_7twyo")]
+position = Vector2(1.90735e-06, 0)
+scale = Vector2(0.85, 0.85)
+dialogResource = ExtResource("7_sa4e2")
+dialogStart = "start"
+location = Vector2(100, 100)
+
+[node name="Stairs" parent="Interactables" instance=ExtResource("13_f6fwp")]
+location = Vector2(100, 100)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TransitionPanel" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+offset_right = 1980.0
+offset_bottom = 1020.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TransitionPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.5
+offset_top = -45.0
+offset_right = -69.5
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+alignment = 1
+
+[node name="DungeonName" type="Label" parent="CanvasLayer/TransitionPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "DUNGEON NAME"
+horizontal_alignment = 1
+
+[node name="DungeonFloor" type="Label" parent="CanvasLayer/TransitionPanel/VBoxContainer"]
+layout_mode = 2
+text = "FL - X"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/TransitionPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_26j24")
+}
+
+[node name="Generate Dungeon" type="Button" parent="CanvasLayer"]
+offset_left = 1790.0
+offset_top = 34.0
+offset_right = 1945.0
+offset_bottom = 65.0
+text = "Generate Dungeon"
+
+[node name="Default Room" type="Button" parent="CanvasLayer"]
+offset_left = 1790.0
+offset_top = 76.0
+offset_right = 1945.0
+offset_bottom = 107.0
+text = "Default Room"
+
+[node name="Deal Damage" type="Button" parent="CanvasLayer"]
+offset_left = 1790.0
+offset_top = 117.0
+offset_right = 1945.0
+offset_bottom = 148.0
+text = "Deal 10 Damage
+"
+
+[node name="List State" type="Button" parent="CanvasLayer"]
+offset_left = 1790.0
+offset_top = 157.0
+offset_right = 1945.0
+offset_bottom = 188.0
+text = "List State Info
+"
+
+[node name="Save State" type="Button" parent="CanvasLayer"]
+offset_left = 1790.0
+offset_top = 201.0
+offset_right = 1945.0
+offset_bottom = 232.0
+text = "Save State"
+
+[node name="Load State" type="Button" parent="CanvasLayer"]
+offset_left = 1790.0
+offset_top = 247.0
+offset_right = 1945.0
+offset_bottom = 278.0
+text = "Load State
+"
+
+[node name="PlayerHealth" parent="CanvasLayer" instance=ExtResource("4_6s5ad")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 34.0
+offset_right = -226.0
+offset_bottom = 38.0
+grow_horizontal = 2
+scale = Vector2(3.90823, 3.90823)
+LabelVisible = true
+
+[node name="Label" parent="CanvasLayer/PlayerHealth" index="2"]
+offset_top = 3.582
+offset_bottom = 26.582
+scale = Vector2(0.5, 0.5)
+
+[node name="Strike" type="Button" parent="CanvasLayer"]
+offset_left = 1790.0
+offset_top = 295.0
+offset_right = 1945.0
+offset_bottom = 326.0
+text = "Strike"
+
+[node name="Flamethrower" type="Button" parent="CanvasLayer"]
+offset_left = 1790.0
+offset_top = 341.0
+offset_right = 1945.0
+offset_bottom = 372.0
+text = "Flamethrower"
+
+[node name="Level State" type="Label" parent="CanvasLayer"]
+offset_left = 1487.0
+offset_top = 18.0
+offset_right = 1528.0
+offset_bottom = 41.0
+scale = Vector2(2, 2)
+theme = ExtResource("15_104wg")
+text = "FL - X"
+
+[node name="Character Level" type="Label" parent="CanvasLayer"]
+offset_left = 391.0
+offset_top = 18.0
+offset_right = 453.0
+offset_bottom = 41.0
+scale = Vector2(2, 2)
+theme = ExtResource("15_104wg")
+text = "LV - XXX"
+
+[connection signal="pressed" from="CanvasLayer/Generate Dungeon" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Default Room" to="." method="_on_default_room_pressed"]
+[connection signal="pressed" from="CanvasLayer/Deal Damage" to="." method="_on_deal_damage_pressed"]
+[connection signal="pressed" from="CanvasLayer/List State" to="." method="_on_list_all_locations_pressed"]
+[connection signal="pressed" from="CanvasLayer/Save State" to="." method="_on_save_state_pressed"]
+[connection signal="pressed" from="CanvasLayer/Load State" to="." method="_on_load_state_pressed"]
+[connection signal="pressed" from="CanvasLayer/Strike" to="." method="_on_strike_pressed"]
+[connection signal="pressed" from="CanvasLayer/Flamethrower" to="." method="_on_flamethrower_pressed"]
+
+[editable path="DungeonGenerator"]
+[editable path="TurnQueue/PlayerCharacter"]
+[editable path="TurnQueue/PlayerCharacter/DebugHealth"]
+[editable path="TurnQueue/DummyEnemy"]
+[editable path="TurnQueue/DummyEnemy/DebugHealth"]
+[editable path="TurnQueue/DummyEnemy2"]
+[editable path="TurnQueue/DummyEnemy2/DebugHealth"]
+[editable path="TurnQueue/DummyAlly"]
+[editable path="TurnQueue/DummyAlly/DebugHealth"]
+[editable path="CanvasLayer/PlayerHealth"]

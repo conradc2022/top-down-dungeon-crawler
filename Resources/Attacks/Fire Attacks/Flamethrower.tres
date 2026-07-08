@@ -1,0 +1,35 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://c18pgr32ov2iv"]
+
+[ext_resource type="Script" path="res://Scripts/Attacks/DamageStage.cs" id="1_o5jd2"]
+[ext_resource type="Script" path="res://Scripts/Attacks/SecondaryEffect.cs" id="2_ex22n"]
+[ext_resource type="Script" path="res://Scripts/Attacks/AttackStage.cs" id="2_vpahf"]
+[ext_resource type="Script" path="res://Scripts/Attacks/AttackResource.cs" id="3_kkaon"]
+
+[sub_resource type="Resource" id="Resource_txhso"]
+script = ExtResource("2_ex22n")
+secondaryEvent = 1
+probability = 0.1
+
+[sub_resource type="Resource" id="Resource_tsw2k"]
+script = ExtResource("1_o5jd2")
+Power = 75.0
+FixedDamage = 0.0
+secondaryEffect = Array[Object]([SubResource("Resource_txhso")])
+secondaryEffectStacking = 0
+
+[sub_resource type="Resource" id="Resource_rd8bj"]
+script = ExtResource("2_vpahf")
+damageType = 6
+targets = 7
+travelType = 10
+damageStage = SubResource("Resource_tsw2k")
+distance = 10
+accuracy = 1.0
+
+[resource]
+script = ExtResource("3_kkaon")
+Name = "Flamethrower"
+Stages = Array[Object]([SubResource("Resource_rd8bj")])
+Cooldown = 5
+HungerCost = 5
+Description = "Throw a bolt of flame."

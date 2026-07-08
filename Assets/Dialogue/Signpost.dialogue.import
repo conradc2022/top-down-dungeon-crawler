@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://c4ura0vbttyae"
+path="res://.godot/imported/Signpost.dialogue-9a0b9b470c3609ae5b5ec60f58d7e4c1.tres"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Signpost.dialogue"
+dest_files=["res://.godot/imported/Signpost.dialogue-9a0b9b470c3609ae5b5ec60f58d7e4c1.tres"]
+
+[params]
+
+defaults=true

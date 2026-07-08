@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://cgmaiabi0wl4m"
+path="res://.godot/imported/Stairs.dialogue-440d04195e159a0c6b7ca19022b43b31.tres"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Stairs.dialogue"
+dest_files=["res://.godot/imported/Stairs.dialogue-440d04195e159a0c6b7ca19022b43b31.tres"]
+
+[params]
+
+defaults=true

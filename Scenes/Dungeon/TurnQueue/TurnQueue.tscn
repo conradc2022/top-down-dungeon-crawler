@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djgbsexklsgoh"]
+
+[ext_resource type="Script" path="res://Scripts/Dungeon/TurnQueue.cs" id="1_xo61r"]
+
+[node name="TurnQueue" type="Node"]
+script = ExtResource("1_xo61r")

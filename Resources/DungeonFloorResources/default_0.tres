@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PrefabGenerationResource" load_steps=2 format=3 uid="uid://ck0bl0rn775kf"]
+
+[ext_resource type="Script" path="res://Scripts/Dungeon/DungeonManagement/PrefabGenerationResource.cs" id="1_tje4y"]
+
+[resource]
+script = ExtResource("1_tje4y")
+Name = "prefab_0"
+TileSet = "default"
+PrefabID = 0
+ValidEnemies = null
+ValidItems = null
+Frequency = 1.0
+GridPosition = Vector2i(0, 0)
+MinCount = 0
+MaxCount = 100
+IgnorePosition = true
+IgnoreMax = false
+IgnoreMin = false

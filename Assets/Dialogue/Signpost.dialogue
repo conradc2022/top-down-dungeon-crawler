@@ -1,0 +1,10 @@
+~ start
+Sign|One_Tilted: Welcome to the game.
+- What is to the right?
+	Sign|One_Tilted: Tne tutorial.
+	=> start
+- What is to the left?
+	Sign|One_Tilted: The credits.
+	=> start
+- End the conversation
+=> END

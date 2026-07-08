@@ -1,0 +1,51 @@
+[gd_resource type="Resource" load_steps=10 format=3 uid="uid://bgdsh5wb756ld"]
+
+[ext_resource type="Script" path="res://Scripts/Attacks/DamageStage.cs" id="1_k01n3"]
+[ext_resource type="Script" path="res://Scripts/Attacks/SecondaryEffect.cs" id="2_4qiqe"]
+[ext_resource type="Script" path="res://Scripts/Attacks/AttackStage.cs" id="3_m83vk"]
+[ext_resource type="Script" path="res://Scripts/Attacks/AttackResource.cs" id="4_kxmqn"]
+
+[sub_resource type="Resource" id="Resource_tsw2k"]
+script = ExtResource("1_k01n3")
+Power = 0.0
+FixedDamage = 0.0
+secondaryEffect = null
+secondaryEffectStacking = 0
+
+[sub_resource type="Resource" id="Resource_rd8bj"]
+script = ExtResource("3_m83vk")
+damageType = 0
+targets = 7
+travelType = 10
+damageStage = SubResource("Resource_tsw2k")
+distance = 10
+accuracy = 1.0
+
+[sub_resource type="Resource" id="Resource_q3mql"]
+script = ExtResource("2_4qiqe")
+secondaryEvent = 1
+probability = 0.2
+
+[sub_resource type="Resource" id="Resource_lkkve"]
+script = ExtResource("1_k01n3")
+Power = 65.0
+FixedDamage = 0.0
+secondaryEffect = Array[Object]([SubResource("Resource_q3mql")])
+secondaryEffectStacking = 0
+
+[sub_resource type="Resource" id="Resource_gv0cb"]
+script = ExtResource("3_m83vk")
+damageType = 6
+targets = 7
+travelType = 18
+damageStage = SubResource("Resource_lkkve")
+distance = 10
+accuracy = 0.9
+
+[resource]
+script = ExtResource("4_kxmqn")
+Name = "Firebomb"
+Stages = Array[Object]([SubResource("Resource_rd8bj"), SubResource("Resource_gv0cb")])
+Cooldown = 5
+HungerCost = 5
+Description = "Throw a bolt of flame."

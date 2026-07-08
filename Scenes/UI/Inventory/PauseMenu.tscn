@@ -1,0 +1,573 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6e6pdrtevtqp"]
+
+[ext_resource type="Theme" uid="uid://46le30cv5vyw" path="res://Assets/Themes/default_theme.tres" id="1_hk8en"]
+[ext_resource type="Script" path="res://Scripts/UI/Inventory/PauseMenu.cs" id="2_6ld38"]
+[ext_resource type="PackedScene" uid="uid://bmgjr5wkp5b7g" path="res://Scenes/UI/Inventory/CharacterOverview.tscn" id="2_8ctps"]
+[ext_resource type="PackedScene" uid="uid://bqhqb7dagy6ao" path="res://Scenes/UI/Inventory/MoveButton.tscn" id="3_xtbrl"]
+[ext_resource type="PackedScene" uid="uid://bs3wah7rnmh1u" path="res://Scenes/UI/Inventory/SelectCharacter.tscn" id="4_njddw"]
+[ext_resource type="PackedScene" uid="uid://bgfg0n0qnwnqw" path="res://Scenes/UI/Inventory/ItemButton.tscn" id="5_5lqmi"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hk8en")
+script = ExtResource("2_6ld38")
+
+[node name="Navigator" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 44.0
+offset_top = 44.0
+offset_right = 194.0
+offset_bottom = 309.0
+theme = ExtResource("1_hk8en")
+color = Color(0.2, 0.2, 0.2, 0.619608)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Navigator"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 259.0
+alignment = 1
+
+[node name="Home" type="Button" parent="Navigator/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+text = "Home"
+
+[node name="HSeparator" type="HSeparator" parent="Navigator/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Moves" type="Button" parent="Navigator/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+text = "Moves"
+
+[node name="HSeparator2" type="HSeparator" parent="Navigator/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Items" type="Button" parent="Navigator/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+text = "Items"
+
+[node name="HSeparator3" type="HSeparator" parent="Navigator/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Party" type="Button" parent="Navigator/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+text = "Party"
+
+[node name="HSeparator4" type="HSeparator" parent="Navigator/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Options" type="Button" parent="Navigator/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+text = "Options"
+
+[node name="HSeparator5" type="HSeparator" parent="Navigator/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Exit" type="Button" parent="Navigator/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+text = "Exit"
+
+[node name="StatusOverview" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 345.0
+offset_right = 1030.0
+offset_bottom = 625.0
+theme = ExtResource("1_hk8en")
+color = Color(0.2, 0.2, 0.2, 0.619608)
+
+[node name="BasicStatus" type="VBoxContainer" parent="StatusOverview"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 790.0
+offset_bottom = 290.0
+theme = ExtResource("1_hk8en")
+
+[node name="Location" type="Control" parent="StatusOverview/BasicStatus"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="LocationLabel" type="Label" parent="StatusOverview/BasicStatus/Location"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 81.0
+offset_bottom = 33.0
+text = "Location:"
+
+[node name="LocationText" type="Label" parent="StatusOverview/BasicStatus/Location"]
+layout_mode = 2
+offset_left = 85.0
+offset_top = 10.0
+offset_right = 218.0
+offset_bottom = 33.0
+text = "DUNGEON NAME"
+
+[node name="FloorLabel" type="Label" parent="StatusOverview/BasicStatus/Location"]
+layout_mode = 2
+offset_left = 389.0
+offset_top = 10.0
+offset_right = 433.0
+offset_bottom = 33.0
+text = "Floor:"
+
+[node name="FloorText" type="Label" parent="StatusOverview/BasicStatus/Location"]
+layout_mode = 2
+offset_left = 437.0
+offset_top = 10.0
+offset_right = 469.0
+offset_bottom = 33.0
+text = "FL #"
+
+[node name="WeatherLabel" type="Label" parent="StatusOverview/BasicStatus/Location"]
+layout_mode = 2
+offset_left = 606.0
+offset_top = 10.0
+offset_right = 677.0
+offset_bottom = 33.0
+text = "Weather:"
+
+[node name="WeatherText" type="Label" parent="StatusOverview/BasicStatus/Location"]
+layout_mode = 2
+offset_left = 682.0
+offset_top = 10.0
+offset_right = 730.0
+offset_bottom = 33.0
+text = "Sunny"
+
+[node name="HSeparator" type="HSeparator" parent="StatusOverview/BasicStatus"]
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="CharacterOverview" parent="StatusOverview/BasicStatus" instance=ExtResource("2_8ctps")]
+layout_mode = 2
+CharacterName = "Jones"
+Level = 1
+CurrentHealth = 10
+MaxHealth = 15
+CurrentHunger = 95
+MaxHunger = 100
+Status = "Fine"
+
+[node name="HSeparator3" type="HSeparator" parent="StatusOverview/BasicStatus"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="CharacterOverview2" parent="StatusOverview/BasicStatus" instance=ExtResource("2_8ctps")]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="StatusOverview/BasicStatus"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="CharacterOverview3" parent="StatusOverview/BasicStatus" instance=ExtResource("2_8ctps")]
+layout_mode = 2
+
+[node name="HSeparator5" type="HSeparator" parent="StatusOverview/BasicStatus"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="CharacterOverview4" parent="StatusOverview/BasicStatus" instance=ExtResource("2_8ctps")]
+layout_mode = 2
+
+[node name="MoveOverview" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 48.0
+offset_right = 889.0
+offset_bottom = 328.0
+color = Color(0.2, 0.2, 0.2, 0.619608)
+
+[node name="TabContainer" type="TabContainer" parent="MoveOverview"]
+layout_mode = 0
+offset_left = 158.0
+offset_right = 658.0
+offset_bottom = 280.0
+tabs_visible = false
+
+[node name="Character 1" type="Control" parent="MoveOverview/TabContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MoveOverview/TabContainer/Character 1"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 490.0
+offset_bottom = 240.0
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveOverview/TabContainer/Character 1/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton" parent="MoveOverview/TabContainer/Character 1/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MoveOverview/TabContainer/Character 1/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton2" parent="MoveOverview/TabContainer/Character 1/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="MoveOverview/TabContainer/Character 1/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton3" parent="MoveOverview/TabContainer/Character 1/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MoveOverview/TabContainer/Character 1/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton4" parent="MoveOverview/TabContainer/Character 1/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="Character 2" type="Control" parent="MoveOverview/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MoveOverview/TabContainer/Character 2"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 490.0
+offset_bottom = 240.0
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveOverview/TabContainer/Character 2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton" parent="MoveOverview/TabContainer/Character 2/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MoveOverview/TabContainer/Character 2/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton2" parent="MoveOverview/TabContainer/Character 2/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="MoveOverview/TabContainer/Character 2/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton3" parent="MoveOverview/TabContainer/Character 2/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MoveOverview/TabContainer/Character 2/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton4" parent="MoveOverview/TabContainer/Character 2/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="Character 3" type="Control" parent="MoveOverview/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MoveOverview/TabContainer/Character 3"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 490.0
+offset_bottom = 240.0
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveOverview/TabContainer/Character 3/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton" parent="MoveOverview/TabContainer/Character 3/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MoveOverview/TabContainer/Character 3/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton2" parent="MoveOverview/TabContainer/Character 3/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="MoveOverview/TabContainer/Character 3/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton3" parent="MoveOverview/TabContainer/Character 3/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MoveOverview/TabContainer/Character 3/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton4" parent="MoveOverview/TabContainer/Character 3/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="Character 4" type="Control" parent="MoveOverview/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MoveOverview/TabContainer/Character 4"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 490.0
+offset_bottom = 240.0
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveOverview/TabContainer/Character 4/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton" parent="MoveOverview/TabContainer/Character 4/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MoveOverview/TabContainer/Character 4/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton2" parent="MoveOverview/TabContainer/Character 4/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="MoveOverview/TabContainer/Character 4/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton3" parent="MoveOverview/TabContainer/Character 4/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MoveOverview/TabContainer/Character 4/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="MoveButton4" parent="MoveOverview/TabContainer/Character 4/ScrollContainer/VBoxContainer" instance=ExtResource("3_xtbrl")]
+layout_mode = 2
+
+[node name="SelectCharacter" parent="MoveOverview" instance=ExtResource("4_njddw")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 150.0
+offset_bottom = 210.0
+
+[node name="Button5" parent="MoveOverview/SelectCharacter/VBoxContainer" index="0"]
+visible = false
+
+[node name="HSeparator4" parent="MoveOverview/SelectCharacter/VBoxContainer" index="1"]
+visible = false
+
+[node name="Inventory" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 214.0
+offset_top = 43.0
+offset_right = 914.0
+offset_bottom = 603.0
+color = Color(0.2, 0.2, 0.2, 0.619608)
+
+[node name="SelectCharacter" parent="Inventory" instance=ExtResource("4_njddw")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 150.0
+offset_bottom = 260.0
+
+[node name="VBoxContainer" parent="Inventory/SelectCharacter" index="0"]
+offset_bottom = 254.0
+
+[node name="Inventory" type="ColorRect" parent="Inventory"]
+layout_mode = 0
+offset_left = 158.0
+offset_right = 678.0
+offset_bottom = 560.0
+color = Color(0.136826, 0.136826, 0.136826, 0.619608)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Inventory/Inventory"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 490.0
+offset_bottom = 240.0
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/Inventory/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemButton" parent="Inventory/Inventory/ScrollContainer/VBoxContainer" instance=ExtResource("5_5lqmi")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Inventory/Inventory/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="ItemButton2" parent="Inventory/Inventory/ScrollContainer/VBoxContainer" instance=ExtResource("5_5lqmi")]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="Inventory/Inventory/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="ItemButton3" parent="Inventory/Inventory/ScrollContainer/VBoxContainer" instance=ExtResource("5_5lqmi")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Inventory/Inventory/ScrollContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Party" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 224.0
+offset_top = 50.0
+offset_right = 924.0
+offset_bottom = 610.0
+color = Color(0.2, 0.2, 0.2, 0.619608)
+
+[node name="SelectCharacter" parent="Party" instance=ExtResource("4_njddw")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 150.0
+offset_bottom = 210.0
+
+[node name="Button5" parent="Party/SelectCharacter/VBoxContainer" index="0"]
+visible = false
+
+[node name="HSeparator4" parent="Party/SelectCharacter/VBoxContainer" index="1"]
+visible = false
+
+[node name="Settings" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 214.0
+offset_top = 43.0
+offset_right = 914.0
+offset_bottom = 603.0
+color = Color(0.2, 0.2, 0.2, 0.619608)
+
+[node name="TabContainer" type="TabContainer" parent="Settings"]
+layout_mode = 0
+offset_right = 700.0
+offset_bottom = 560.0
+
+[node name="Controls" type="Control" parent="Settings/TabContainer"]
+layout_mode = 2
+
+[node name="Sound" type="Control" parent="Settings/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Graphics" type="Control" parent="Settings/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Exit" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 491.0
+offset_top = 202.0
+offset_right = 661.0
+offset_bottom = 402.0
+color = Color(0.2, 0.2, 0.2, 0.619608)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Exit"]
+custom_minimum_size = Vector2(137, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 161.0
+offset_bottom = 190.0
+
+[node name="Label" type="Label" parent="Exit/VBoxContainer"]
+layout_mode = 2
+text = "Exit Game:"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="Exit/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Main Menu" type="Button" parent="Exit/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Exit to Main Menu"
+
+[node name="HSeparator2" type="HSeparator" parent="Exit/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Close" type="Button" parent="Exit/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Exit and Close"
+
+[node name="HSeparator" type="HSeparator" parent="Exit/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_hk8en")
+
+[node name="Back" type="Button" parent="Exit/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Back
+"
+
+[connection signal="pressed" from="Navigator/VBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Navigator/VBoxContainer/Moves" to="." method="_on_moves_pressed"]
+[connection signal="pressed" from="Navigator/VBoxContainer/Items" to="." method="_on_items_pressed"]
+[connection signal="pressed" from="Navigator/VBoxContainer/Party" to="." method="_on_party_pressed"]
+[connection signal="pressed" from="Navigator/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Navigator/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+
+[editable path="StatusOverview/BasicStatus/CharacterOverview"]
+[editable path="MoveOverview/SelectCharacter"]
+[editable path="Inventory/SelectCharacter"]
+[editable path="Party/SelectCharacter"]

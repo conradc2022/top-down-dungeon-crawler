@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b573cjnpbdtqt"]
+
+[ext_resource type="Script" path="res://Scripts/Dungeon/DungeonGenerators/ResourceClasses/RandomWalkResource.cs" id="1_s62om"]
+
+[resource]
+script = ExtResource("1_s62om")
+Iterations = 100
+WalkLength = 20
+StartRandomly = true

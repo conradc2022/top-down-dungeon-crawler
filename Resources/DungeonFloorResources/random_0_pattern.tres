@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="FloorParameterResource" load_steps=3 format=3 uid="uid://be25ioa4wx2ch"]
+
+[ext_resource type="Resource" uid="uid://dno3mhnl0cd86" path="res://Resources/DungeonGenerator/SmallRoomFirst.tres" id="1_8tym5"]
+[ext_resource type="Script" path="res://Scripts/Dungeon/DungeonManagement/FloorParameterResource.cs" id="1_eg8e4"]
+
+[resource]
+script = ExtResource("1_eg8e4")
+Name = "random_0"
+TileSets = null
+ValidEnemies = null
+ValidPrefabs = Array[Object]([])
+MaxPrefabCount = 0
+EnemySpawnRate = 0
+MaxItemCount = 0
+ValidItems = null
+DungeonGeneratorResource = ExtResource("1_8tym5")
+Frequency = 1.0
+GridPosition = Vector2i(0, 0)
+MinCount = 0
+MaxCount = 100
+IgnorePosition = true
+IgnoreMax = false
+IgnoreMin = false

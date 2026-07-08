@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bi0jcc8of0kfo"]
+
+[ext_resource type="Texture2D" uid="uid://dqa8ri31587ex" path="res://Assets/PixelArt/Reticule/BoxReticule.png" id="1_u0ftt"]
+[ext_resource type="Script" path="res://Scripts/Character/TargetingSystem.cs" id="1_vf8fw"]
+[ext_resource type="Texture2D" uid="uid://bmvwfeyojina4" path="res://Assets/PixelArt/Reticule/CrossReticule.png" id="2_qs5co"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_amb3h"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jt13m"]
+size = Vector2(14, 14)
+
+[node name="Targeting System" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_vf8fw")
+speed = 3.0
+AllyTargeted = Color(0.941176, 0.960784, 0.129412, 1)
+EnemyTargeted = Color(0.854902, 0.0980392, 0.141176, 1)
+NeutralTargeted = Color(0.827451, 0.466667, 0.188235, 1)
+NothingTargeted = Color(0.494118, 0.568627, 0.756863, 1)
+InteractableTargeted = Color(0.054902, 0.960784, 0.129412, 1)
+
+[node name="PathNodes" type="Node2D" parent="."]
+
+[node name="BoxReticle" type="Sprite2D" parent="PathNodes"]
+y_sort_enabled = true
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_u0ftt")
+centered = false
+offset = Vector2(-32, -32)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 12
+
+[node name="CrossReticle" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_qs5co")
+centered = false
+offset = Vector2(-32, -32)
+
+[node name="EntityCollisionShape" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_amb3h")
+debug_color = Color(1, 1, 1, 0.42)
+
+[node name="WallCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jt13m")
+debug_color = Color(0.811431, 0.410809, 0, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_entity_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_entity_body_exited"]

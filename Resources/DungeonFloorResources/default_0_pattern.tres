@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FloorParameterResource" load_steps=3 format=3 uid="uid://7c7mlv3h75hv"]
+
+[ext_resource type="Resource" uid="uid://ck0bl0rn775kf" path="res://Resources/DungeonFloorResources/default_0.tres" id="1_rfflc"]
+[ext_resource type="Script" path="res://Scripts/Dungeon/DungeonManagement/FloorParameterResource.cs" id="2_r2q24"]
+
+[resource]
+script = ExtResource("2_r2q24")
+Name = "default_0"
+TileSets = Array[String](["default"])
+ValidEnemies = null
+ValidPrefabs = Array[Object]([ExtResource("1_rfflc")])
+MaxPrefabCount = 1
+EnemySpawnRate = 0
+MaxItemCount = 0
+ValidItems = null
+Frequency = 1.0
+GridPosition = Vector2i(0, 0)
+MinCount = 0
+MaxCount = 100
+IgnorePosition = false
+IgnoreMax = false
+IgnoreMin = false
