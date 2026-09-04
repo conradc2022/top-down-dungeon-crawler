@@ -40,7 +40,7 @@ public partial class InitDungeon : Node2D
         saveManager = GetNode<SaveManager>("SaveManager");
         turnQueue.Initialize();
         FloorLevel = 0;
-        FloorLevelLabel = GetNode<Label>("CanvasLayer/Level State");
+        FloorLevelLabel = GetNode<Label>("CanvasLayer/CharacterState/Level State");
         TransitionAnimationPlayer = GetNode<AnimationPlayer>("CanvasLayer/TransitionPanel/AnimationPlayer");
         TransitionDungeonLabel = GetNode<Label>("CanvasLayer/TransitionPanel/VBoxContainer/DungeonName");
         TransitionFloorLabel = GetNode<Label>("CanvasLayer/TransitionPanel/VBoxContainer/DungeonFloor");
@@ -48,6 +48,10 @@ public partial class InitDungeon : Node2D
         if(playerCharacter != null)
         {
             playerCharacter.Connect(nameof(Character.Character.MoveComplete), new(this, nameof(this._on_player_position_change)));
+            foreach(Character.Character character in turnQueue.GetChildren().OfType<Character.Character>().Where(e => e != playerCharacter).ToList())
+            {
+                character.AIMoveComplete += () => _on_ai_position_changed(character);
+            }
         }
         UpdateFloorLevel(FloorLevel);
         UpdateDungeonName(DungeonName);
@@ -100,7 +104,8 @@ public partial class InitDungeon : Node2D
             {
                 Vector2I result = FindUnoccupiedSpace(dungeon.Floor, 
                 characters.Select(character => TranslatePositionToTile(character.GlobalPosition)).Union(interactables.Select(character => TranslatePositionToTile(character.GlobalPosition))).ToList());
-                //entity.GlobalPosition = TranslateTileToPosition(result);
+                entity.ClearCollision();
+            
                 entity.SetPosition(TranslateTileToPosition(result));
             }
         }
@@ -117,14 +122,14 @@ public partial class InitDungeon : Node2D
         {
             Vector2I result = FindUnoccupiedSpace(dungeon.Floor, 
                 interactables.Select(character => TranslatePositionToTile(character.GlobalPosition)).Union(interactables.Select(character => TranslatePositionToTile(character.GlobalPosition))).ToList());
-                //entity.GlobalPosition = TranslateTileToPosition(result);
+                
                 entity.SetPosition(TranslateTileToPosition(result));
         }
         foreach(Character.Character entity in characters)
         {
             Vector2I result = FindUnoccupiedSpace(dungeon.Floor,
             characters.Select(character => TranslatePositionToTile(character.GlobalPosition)).Union(interactables.Select(character => TranslatePositionToTile(character.GlobalPosition))).ToList());
-            //entity.GlobalPosition = TranslateTileToPosition(result);
+            entity.ClearCollision();
             entity.SetPosition(TranslateTileToPosition(result));
         }
         
@@ -154,7 +159,7 @@ public partial class InitDungeon : Node2D
         $"|| StateBefore: {dungeonGenerator.StateBefore} || StateAfter: {dungeonGenerator.StateAfter}");*/
         foreach(Node2D node in turnQueue.GetChildren().Union(Interactables.GetChildren()))
         {
-            Debug.WriteLine($"Node: {node}: {node.GlobalPosition} {TranslatePositionToTile(node.GlobalPosition)}");
+            //Debug.WriteLine($"Node: {node}: {node.GlobalPosition} {TranslatePositionToTile(node.GlobalPosition)}");
         }
     }
     public Vector2I TranslatePositionToTile(Vector2 position)
@@ -238,10 +243,32 @@ public partial class InitDungeon : Node2D
         character.SetInteracting(false);
 
     }
+    public async void _on_ai_position_changed(Character.Character character)
+    {
+        
+            //Get the position of the entity
+            Vector2I tile = TranslatePositionToTile(character.GlobalPosition);
+            //Is it in a visible location
+            //If not hide the entity
+            bool isVisible = tileMapVisualizer.GetVisibility(tile);
+            if(isVisible)
+            {
+                character.Visible = true;
+            }
+            else
+            {
+                character.Visible = false;
+            }
+    }
     public async void _on_player_position_change()
     {
-        Debug.WriteLine($"MoveComplete: {TranslatePositionToTile(playerCharacter.GlobalPosition)}");
         tileMapVisualizer.UpdateVisibility(TranslatePositionToTile(playerCharacter.GlobalPosition), GetWorld2D());
+        
+        List<Character.Character> characters = turnQueue.GetChildren().OfType<Character.Character>().ToList();
+        foreach(Character.Character entity in characters)
+        {
+            _on_ai_position_changed(entity);
+        }
     }
     
     public async Task<Variant> ConfirmStairs()

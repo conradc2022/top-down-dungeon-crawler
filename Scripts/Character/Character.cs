@@ -41,6 +41,8 @@ public partial class Character : CharacterBody2D
 {
     [Signal]
     public delegate void MoveCompleteEventHandler();
+    [Signal]
+    public delegate void AIMoveCompleteEventHandler();
 
     [Export]
     public CharacterInfo characterInfo;
@@ -107,7 +109,7 @@ public partial class Character : CharacterBody2D
         animationTree = GetNode<AnimationTree>("AnimationTree");
         animationState = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
         
-        Debug.WriteLine($"Hello! I'm {characterInfo.CharacterName} from team {characterInfo.Team}");
+        //Debug.WriteLine($"Hello! I'm {characterInfo.CharacterName} from team {characterInfo.Team}");
         DebugHealth = GetNode<Healthbar>("DebugHealth");
         Statistics = GetNode<CharacterStats>("Statistics");
         Statistics.Initialize();
@@ -123,14 +125,19 @@ public partial class Character : CharacterBody2D
         
         if(LevelState != null)
         {
-            Debug.WriteLine($"Setting Level to: {Statistics.Level}");
+            //Debug.WriteLine($"Setting Level to: {Statistics.Level}");
             LevelState.Text = $"LV - {Statistics.Level}";
         }
         targetingSystem = GetNode<TargetingSystem>("TargetingSystem");
         hitIndicator = GetNode<Label>("HitIndicator");
         hitIndicator.Visible = false;
     }
-    public void SetPosition(Godot.Vector2 globalPosition)
+    public void ClearCollision()
+    {
+        CenterCollision = null;
+    }
+
+    public new void SetPosition(Godot.Vector2 globalPosition)
     {
         GlobalPosition = globalPosition;
         moving = true;
@@ -332,12 +339,12 @@ public partial class Character : CharacterBody2D
                 {
                     if(!character.CanISwitchSpots(characterInfo.Team))
                     {
-                        Debug.WriteLine($"Character: Denied");
+                        //Debug.WriteLine($"Character: Denied");
                         direction = Vector2.Zero;
                     }
                     else
                     {
-                        Debug.WriteLine($"Character: Allowed");
+                        //Debug.WriteLine($"Character: Allowed");
                         character.SetGoalDirection(-direction);
                     }
                 }
@@ -347,7 +354,7 @@ public partial class Character : CharacterBody2D
                 {
                     if(!interactable.CanWalkThrough(this))
                     {
-                        Debug.WriteLine($"Interactable: Denied");
+                        //Debug.WriteLine($"Interactable: Denied");
                         direction = Vector2.Zero;
                         interactable.Interact(this);
                     }
@@ -395,13 +402,17 @@ public partial class Character : CharacterBody2D
             AbstractInteractable interactable = CenterCollision as AbstractInteractable;            
             if(interactable != null)
             {
-                Debug.WriteLine($"Interactable: Entered");
+                //Debug.WriteLine($"Interactable: Entered : {interactable.Name}");
                 interactable.Interact(this);
             }
         }
         if(controller == Controller.Player && moveSchema == MoveSchema.Grid)
         {
             EmitSignal(nameof(MoveComplete));
+        }
+        else if(moveSchema == MoveSchema.Grid)
+        {
+            EmitSignal(nameof(AIMoveComplete));
         }
     }
 

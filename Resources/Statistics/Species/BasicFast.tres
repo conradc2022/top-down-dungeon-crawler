@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_5mf70")
 SourceName = "BasicFast"
+IsStage = false
 SourceType = 1
 Accuracy = 100
 Awareness = 100

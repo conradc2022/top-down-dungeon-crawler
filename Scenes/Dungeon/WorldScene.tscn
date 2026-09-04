@@ -115,8 +115,8 @@ resource = ExtResource("7_7f3l2")
 [node name="PlayerCharacter" parent="TurnQueue" node_paths=PackedStringArray("PrimaryHealth", "LevelState") instance=ExtResource("2_1iw43")]
 slide_on_ceiling = false
 ShowDebugHealth = true
-PrimaryHealth = NodePath("../../CanvasLayer/PlayerHealth")
-LevelState = NodePath("../../CanvasLayer/Character Level")
+PrimaryHealth = NodePath("../../CanvasLayer/CharacterState/PlayerHealth")
+LevelState = NodePath("../../CanvasLayer/CharacterState/Character Level")
 
 [node name="CharacterInfo" parent="TurnQueue/PlayerCharacter" index="0"]
 CharacterName = "Player"
@@ -232,83 +232,32 @@ libraries = {
 "": SubResource("AnimationLibrary_26j24")
 }
 
-[node name="Generate Dungeon" type="Button" parent="CanvasLayer"]
-offset_left = 1790.0
-offset_top = 34.0
-offset_right = 1945.0
-offset_bottom = 65.0
-text = "Generate Dungeon"
+[node name="CharacterState" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Default Room" type="Button" parent="CanvasLayer"]
-offset_left = 1790.0
-offset_top = 76.0
-offset_right = 1945.0
-offset_bottom = 107.0
-text = "Default Room"
-
-[node name="Deal Damage" type="Button" parent="CanvasLayer"]
-offset_left = 1790.0
-offset_top = 117.0
-offset_right = 1945.0
-offset_bottom = 148.0
-text = "Deal 10 Damage
-"
-
-[node name="List State" type="Button" parent="CanvasLayer"]
-offset_left = 1790.0
-offset_top = 157.0
-offset_right = 1945.0
-offset_bottom = 188.0
-text = "List State Info
-"
-
-[node name="Save State" type="Button" parent="CanvasLayer"]
-offset_left = 1790.0
-offset_top = 201.0
-offset_right = 1945.0
-offset_bottom = 232.0
-text = "Save State"
-
-[node name="Load State" type="Button" parent="CanvasLayer"]
-offset_left = 1790.0
-offset_top = 247.0
-offset_right = 1945.0
-offset_bottom = 278.0
-text = "Load State
-"
-
-[node name="PlayerHealth" parent="CanvasLayer" instance=ExtResource("4_6s5ad")]
+[node name="PlayerHealth" parent="CanvasLayer/CharacterState" instance=ExtResource("4_6s5ad")]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -466.0
+offset_left = 504.0
 offset_top = 34.0
-offset_right = -226.0
+offset_right = 744.0
 offset_bottom = 38.0
 grow_horizontal = 2
 scale = Vector2(3.90823, 3.90823)
 LabelVisible = true
 
-[node name="Label" parent="CanvasLayer/PlayerHealth" index="2"]
+[node name="Label" parent="CanvasLayer/CharacterState/PlayerHealth" index="2"]
 offset_top = 3.582
 offset_bottom = 26.582
 scale = Vector2(0.5, 0.5)
 
-[node name="Strike" type="Button" parent="CanvasLayer"]
-offset_left = 1790.0
-offset_top = 295.0
-offset_right = 1945.0
-offset_bottom = 326.0
-text = "Strike"
-
-[node name="Flamethrower" type="Button" parent="CanvasLayer"]
-offset_left = 1790.0
-offset_top = 341.0
-offset_right = 1945.0
-offset_bottom = 372.0
-text = "Flamethrower"
-
-[node name="Level State" type="Label" parent="CanvasLayer"]
+[node name="Level State" type="Label" parent="CanvasLayer/CharacterState"]
+layout_mode = 0
 offset_left = 1487.0
 offset_top = 18.0
 offset_right = 1528.0
@@ -317,7 +266,8 @@ scale = Vector2(2, 2)
 theme = ExtResource("15_104wg")
 text = "FL - X"
 
-[node name="Character Level" type="Label" parent="CanvasLayer"]
+[node name="Character Level" type="Label" parent="CanvasLayer/CharacterState"]
+layout_mode = 0
 offset_left = 391.0
 offset_top = 18.0
 offset_right = 453.0
@@ -326,14 +276,118 @@ scale = Vector2(2, 2)
 theme = ExtResource("15_104wg")
 text = "LV - XXX"
 
-[connection signal="pressed" from="CanvasLayer/Generate Dungeon" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Default Room" to="." method="_on_default_room_pressed"]
-[connection signal="pressed" from="CanvasLayer/Deal Damage" to="." method="_on_deal_damage_pressed"]
-[connection signal="pressed" from="CanvasLayer/List State" to="." method="_on_list_all_locations_pressed"]
-[connection signal="pressed" from="CanvasLayer/Save State" to="." method="_on_save_state_pressed"]
-[connection signal="pressed" from="CanvasLayer/Load State" to="." method="_on_load_state_pressed"]
-[connection signal="pressed" from="CanvasLayer/Strike" to="." method="_on_strike_pressed"]
-[connection signal="pressed" from="CanvasLayer/Flamethrower" to="." method="_on_flamethrower_pressed"]
+[node name="DebugButtons" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Generate Dungeon" type="Button" parent="CanvasLayer/DebugButtons"]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 34.0
+offset_right = 1945.0
+offset_bottom = 65.0
+text = "Generate Dungeon"
+
+[node name="Default Room" type="Button" parent="CanvasLayer/DebugButtons"]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 76.0
+offset_right = 1945.0
+offset_bottom = 107.0
+text = "Default Room"
+
+[node name="Deal Damage" type="Button" parent="CanvasLayer/DebugButtons"]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 117.0
+offset_right = 1945.0
+offset_bottom = 148.0
+text = "Deal 10 Damage
+"
+
+[node name="List State" type="Button" parent="CanvasLayer/DebugButtons"]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 157.0
+offset_right = 1945.0
+offset_bottom = 188.0
+text = "List State Info
+"
+
+[node name="Save State" type="Button" parent="CanvasLayer/DebugButtons"]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 201.0
+offset_right = 1945.0
+offset_bottom = 232.0
+text = "Save State"
+
+[node name="Load State" type="Button" parent="CanvasLayer/DebugButtons"]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 247.0
+offset_right = 1945.0
+offset_bottom = 278.0
+text = "Load State
+"
+
+[node name="Strike" type="Button" parent="CanvasLayer/DebugButtons"]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 295.0
+offset_right = 1945.0
+offset_bottom = 326.0
+text = "Strike"
+
+[node name="Flamethrower" type="Button" parent="CanvasLayer/DebugButtons"]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 341.0
+offset_right = 1945.0
+offset_bottom = 372.0
+text = "Flamethrower"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.751
+anchor_top = 0.698
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 453.02
+offset_top = 268.04
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Minimap" type="Node2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+
+[node name="Fog" type="TileMap" parent="CanvasLayer/SubViewportContainer/SubViewport/Minimap"]
+format = 2
+
+[node name="Map" type="TileMap" parent="CanvasLayer/SubViewportContainer/SubViewport/Minimap"]
+format = 2
+
+[node name="MiniCam" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport/Minimap"]
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/SubViewportContainer/SubViewport/Minimap"]
+
+[node name="FogTimer" type="Timer" parent="CanvasLayer/SubViewportContainer/SubViewport/Minimap"]
+
+[connection signal="pressed" from="CanvasLayer/DebugButtons/Generate Dungeon" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/DebugButtons/Default Room" to="." method="_on_default_room_pressed"]
+[connection signal="pressed" from="CanvasLayer/DebugButtons/Deal Damage" to="." method="_on_deal_damage_pressed"]
+[connection signal="pressed" from="CanvasLayer/DebugButtons/List State" to="." method="_on_list_all_locations_pressed"]
+[connection signal="pressed" from="CanvasLayer/DebugButtons/Save State" to="." method="_on_save_state_pressed"]
+[connection signal="pressed" from="CanvasLayer/DebugButtons/Load State" to="." method="_on_load_state_pressed"]
+[connection signal="pressed" from="CanvasLayer/DebugButtons/Strike" to="." method="_on_strike_pressed"]
+[connection signal="pressed" from="CanvasLayer/DebugButtons/Flamethrower" to="." method="_on_flamethrower_pressed"]
 
 [editable path="DungeonGenerator"]
 [editable path="TurnQueue/PlayerCharacter"]
@@ -344,4 +398,4 @@ text = "LV - XXX"
 [editable path="TurnQueue/DummyEnemy2/DebugHealth"]
 [editable path="TurnQueue/DummyAlly"]
 [editable path="TurnQueue/DummyAlly/DebugHealth"]
-[editable path="CanvasLayer/PlayerHealth"]
+[editable path="CanvasLayer/CharacterState/PlayerHealth"]
