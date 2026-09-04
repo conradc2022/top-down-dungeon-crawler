@@ -97,7 +97,7 @@ public partial class DungeonGenerator : Node2D
         Dungeon dungeon = ApplyPrefab(id, position);
         dungeonGenerator.TileMapVisualizer.Dungeon = dungeon;
         List<Vector2I> tiles = dungeon.Floor.Union(dungeon.Walls).ToList();
-        Debug.WriteLine(tiles.Count());
+        //Debug.WriteLine(tiles.Count());
         return dungeon;
     }
 

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_j6nt0")
 SourceName = "BasicSlow"
+IsStage = false
 SourceType = 1
 Accuracy = 100
 Awareness = 100

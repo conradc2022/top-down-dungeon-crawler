@@ -39,6 +39,7 @@ public partial class Stairs : AbstractInteractable
     }
     public void SetOpen(bool open, Resource resource = null)
     {
+        Debug.WriteLine($"SetDialog Open: Stairs {open}");
         if(resource == null || resource == dialogResource)
         {
             dialogOpen = open;
@@ -110,6 +111,7 @@ public partial class Stairs : AbstractInteractable
     public async Task<Variant> ConfirmStairs()
     {
         EmitSignal(SignalName.StairsConfirmed);
+        SetOpen(false);
         return true;
     }
 }

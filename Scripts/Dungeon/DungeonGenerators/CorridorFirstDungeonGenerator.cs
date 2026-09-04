@@ -157,7 +157,7 @@ public partial class CorridorFirstDungeonGenerator : RandomWalkDungeonGenerator
                 }
             }
         }
-        Debug.WriteLine($"NEwCorridor: {newCorridor.Count}");
+        Debug.WriteLine($"NEW Corridor: {newCorridor.Count}");
         return newCorridor;
     }
 }

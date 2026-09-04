@@ -22,6 +22,8 @@ public partial class TileMapVisualizer : Node
     protected Vector2I InvisibleTile = Vector2I.Zero;
     [Export]
     protected Vector2I SeenTile = Vector2I.Right;
+    [Export]
+    protected Vector2I VisibleTile = new Vector2I(-1,-1);
 
     [ExportGroup("FloorTileMap Mappings")]
     [Export]
@@ -197,6 +199,11 @@ public partial class TileMapVisualizer : Node
         return new (pattern.GetUsedCells().Select(tile => tile +position).ToList());
     }
 
+    public bool GetVisibility(Vector2I tile)
+    {
+        return VisibilityTileMap.GetCellAtlasCoords(FloorLayer, tile) == VisibleTile;
+    }
+
     public void UpdateVisibility(Vector2I povTilePosition, World2D world2D)
     {
         uint lightLayerBit = 1 << 5; // Bit 0 (first layer)
@@ -204,26 +211,25 @@ public partial class TileMapVisualizer : Node
         Vector2 povGlobalPosition = TranslateTileToPosition(povTilePosition);
         if(Dungeon == null){return;}
         List<Vector2I> tiles = Dungeon.Floor.Union(Dungeon.Walls).ToList();
-        Debug.WriteLine(tiles.Count());
         foreach(Vector2I tile in tiles)
         {
-            if(VisibilityTileMap.GetCellAtlasCoords(FloorLayer, tile) == InvisibleTile || VisibilityTileMap.GetCellAtlasCoords(FloorLayer, tile) == SeenTile)
-            {
-                
-                int signX = povTilePosition.X > tile.X ? 1 : -1;
-                int signY = povTilePosition.Y > tile.Y ? 1 : -1;
-                Vector2 testLocation = TranslateTileToPosition(tile) + new Vector2(signX, signY) * TileMapSize/2;
-                var query = PhysicsRayQueryParameters2D.Create(povGlobalPosition,testLocation, lightLayerBit);
+            Vector2I cell = VisibilityTileMap.GetCellAtlasCoords(FloorLayer, tile);
+            int signX = povTilePosition.X > tile.X ? 1 : -1;
+            int signY = povTilePosition.Y > tile.Y ? 1 : -1;
+            Vector2 testLocation = TranslateTileToPosition(tile) + new Vector2(signX, signY) * TileMapSize/2;
+            var query = PhysicsRayQueryParameters2D.Create(povGlobalPosition,testLocation, lightLayerBit);
         
-                Dictionary occlusion = world2D.DirectSpaceState.IntersectRay(query);
+            Dictionary occlusion = world2D.DirectSpaceState.IntersectRay(query);
+            if(cell == InvisibleTile || cell == SeenTile)
+            {
                 if(occlusion.Count <= 0 || ((Vector2)occlusion["position"] - testLocation).Length() < 1)
                 {
                     ClearSingleTile(VisibilityTileMap, FloorLayer, tile);
                 }
-                else
-                {
-                    //PaintSingleTile(VisibilityTileMap, SeenTile, FloorLayer, tile);
-                }
+            }
+            else if(occlusion.Count > 0 && ((Vector2)occlusion["position"] - testLocation).Length() > 1)
+            {
+                PaintSingleTile(VisibilityTileMap, SeenTile, FloorLayer, tile);
             }
         }
     }
